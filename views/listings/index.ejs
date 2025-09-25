@@ -25,6 +25,12 @@
       .tax-info {
         display: none;
       }
+
+      @media screen and (max-width: 600px) {
+        .filter {
+          flex: 0 1 calc(50% - 10px);
+        }
+      }
     </style>
     <div class="container my-4">
       <div id="filters">
@@ -120,7 +126,7 @@
       object-fit: cover;
       transition: filter 0.4s, transform 0.4s;
       width: 100%;
-   
+
       border-radius: 18px 18px 0 0;
 
     }
@@ -382,7 +388,7 @@
 
     .form-check-label {
       font-size: 1.5rem;
-     
+
       font-weight: 500;
     }
 
