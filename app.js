@@ -23,7 +23,7 @@ const { savedurl } = require("./middleware");
 const listingcontroller = require("./controllers/listings");
 const reviewcontroller = require("./controllers/reviews");
 const usercontroller = require("./controllers/users");
-const wrapAsync = require("./utils/wrapasync");
+const wrapAsync = require("./utils/wrapAsync");
 const mongostore = require("connect-mongo");
 const { wrap } = require("module");
 
