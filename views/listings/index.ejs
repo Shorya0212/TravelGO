@@ -1,0 +1,411 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+  <body>
+    <style>
+      #filters {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .filter {
+        text-align: center;
+        margin-right: 2.3rem;
+        margin-top: 2rem;
+        opacity: 0.9;
+      }
+
+      .filter:hover {
+        opacity: 2;
+        cursor: pointer;
+
+
+
+      }
+
+      .tax-info {
+        display: none;
+      }
+    </style>
+    <div class="container my-4">
+      <div id="filters">
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Trending</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-bed"></i></div>
+          <p>Rooms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain"></i></div>
+          <p>Mountains</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Castles</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-person-swimming"></i></div>
+          <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-campground"></i></div>
+          <p>Camping</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-cow"></i></div>
+          <p>Farms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-regular fa-snowflake"></i></div>
+          <p>Arctic</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-igloo"></i></div>
+          <p>Domes</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-ship"></i></div>
+          <p>Boats</p>
+        </div>
+        <div class="tax-toggle">
+          <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+              Display total after taxes
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <h2 class="text-center section-title">All Listings</h2>
+
+      <div class="row">
+        <% for (let listing of listings) { %>
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100 travel-card">
+              <img src="<%= listing.image.url %>" class="card-img-top fixed-img" alt="<%= listing.title %>">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= listing.title %>
+                </h5>
+                <p class="card-text">
+                  <%= listing.description %>
+                </p>
+                <p class="fw-bold">₹<%= listing.price %>/Night</p>
+                <i class="tax-info">&nbsp;18%+GST</i>
+                <p class="text-muted">
+                  <%= listing.location %>, <%= listing.country %>
+                </p>
+                <a href="/listings/<%= listing._id %>" class="btn btn-danger w-100">View Details</a>
+              </div>
+            </div>
+          </div>
+          <% } %>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    .fixed-img {
+      height: 220px;
+      object-fit: cover;
+      transition: filter 0.4s, transform 0.4s;
+      width: 100%;
+   
+      border-radius: 18px 18px 0 0;
+
+    }
+
+    .travel-card {
+      border-radius: 18px;
+      transition: transform 0.3s cubic-bezier(.17, .67, .83, .67), box-shadow 0.3s, border 0.3s;
+      overflow: hidden;
+      display: flex;
+
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+
+      background-color: #fff;
+
+    }
+
+    .travel-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22), 0 4px 18px rgba(220, 53, 69, 0.08);
+      border: 2px solid #dc3545;
+    }
+
+    .travel-card:hover .fixed-img {
+      filter: brightness(0.92) saturate(1.15);
+      transform: scale(1.04);
+    }
+
+    .travel-card .card-body {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      padding: 15px;
+    }
+
+    .travel-card .card-title {
+      font-weight: bold;
+      color: #343a40;
+      transition: color 0.3s;
+    }
+
+    .travel-card:hover .card-title {
+      color: #dc3545;
+    }
+
+    .btn-danger {
+      transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 18px rgba(220, 53, 69, 0.11);
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(220, 53, 69, 0.20);
+    }
+
+    .travel-card {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .travel-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .travel-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .travel-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .travel-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .travel-card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .travel-card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 768px) {
+      .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 3200px;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .container {
+      max-width: 1500px;
+      padding-left: 4px;
+      padding-right: 4px;
+      margin: 0 auto;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -12px;
+      margin-right: -12px;
+      gap: 24px;
+
+    }
+
+    .col-md-4 {
+      flex: 0 0 calc(33.333% - 16px);
+      max-width: calc(33.333% - 16px);
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-bottom: 24px;
+
+    }
+
+    .travel-card {
+      border-radius: 18px;
+      transition: transform 0.3s cubic-bezier(.17, .67, .83, .67), box-shadow 0.3s, border 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding-bottom: 16px;
+
+    }
+
+    .fixed-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: filter 0.4s, transform 0.4s;
+      border-radius: 18px 18px 0 0;
+      display: block;
+    }
+
+    .card-body {
+      flex-grow: 1;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-weight: bold;
+      color: #343a40;
+      transition: color 0.3s;
+      margin-bottom: 10px;
+    }
+
+    .travel-card:hover .card-title {
+      color: #dc3545;
+    }
+
+    .btn-danger {
+      transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 18px rgba(220, 53, 69, 0.11);
+      font-size: 1rem;
+      padding: 10px 16px;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(220, 53, 69, 0.20);
+    }
+
+
+    @media (max-width: 768px) {
+      .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      .row {
+        gap: 16px;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .container {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #df3030;
+      letter-spacing: 1.5px;
+      position: relative;
+      padding-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+
+      border-radius: 2px;
+      animation: underlineGrow 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes underlineGrow {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 80px;
+      }
+    }
+
+    .form-check-label {
+      font-size: 1.5rem;
+     
+      font-weight: 500;
+    }
+
+    .tax-toggle {
+      border: 1px solid black;
+      border-radius: 1rem;
+      height: 3.5rem;
+      padding: 1rem;
+      margin-left: 5rem;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+  <script>
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for (info of taxInfo) {
+        if (info.style.display != "inline") {
+          info.style.display = "inline";
+        } else {
+          info.style.display = "none";
+        }
+      }
+    });
+  </script>

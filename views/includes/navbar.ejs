@@ -1,0 +1,172 @@
+<nav class="navbar navbar-expand-md navbar-light shadow-sm sticky-top py-2" id="mainNavbar">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center fw-bold text-white fs-4" href="/listings">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.lbL2rWmfPM7-2_A52r44dQHaHa?pid=Api&P=0&h=180" alt="Logo" width="40"
+        height="40" class="me-2 rounded-circle border border-2 border-white p-1 logo-anim">
+      TravelGO
+    </a>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav fw-semibold">
+
+        <a class="nav-link custom-link text-white" href="/listings">Explore</a>
+        <a class="nav-link custom-link text-white" href="/listings/new">Add New</a>
+      </div>
+      <div class="navbar-nav mx-auto col-md-3">
+        <form class="d-flex" role="search">
+          <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-search" type="submit">Search</button>
+        </form>
+      </div>
+      <div class="navbar-nav ms-auto fw-semibold">
+        <% if(!currentUser){ %>
+          <a class="nav-link custom-link text-white" href="/signup">Signup</a>
+          <a class="nav-link custom-link text-white" href="/login">Login</a>
+
+          <%}%>
+            <% if(currentUser){ %>
+              <a class="nav-link custom-link text-white" href="/logout">logout</a>
+              <%}%>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<style>
+
+  #mainNavbar {
+    background: #df3030;
+
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  #mainNavbar.scrolled {
+    background: #eb2424 !important;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+
+  .logo-anim {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .logo-anim:hover {
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  }
+
+
+  .custom-link {
+    margin: 0 12px;
+    padding: 6px 14px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+
+  .custom-link:hover {
+    color: #fff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+  }
+
+
+  .custom-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+  }
+
+  .custom-link:hover::after {
+    width: 60%;
+  }
+
+  
+  .custom-link.active {
+    color: #fff !important;
+    font-weight: bold;
+  }
+
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .btn-search {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+
+  .btn-search:hover {
+    background-color: #fe424d;
+    color: #fff;
+  }
+
+  .btn-search i {
+    display: inline;
+    margin-right: 0.5rem;
+  }
+
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    font-size: 0.8rem;
+  }
+</style>
+
+
+<script>
+  window.addEventListener("scroll", function () {
+    const navbar = document.getElementById("mainNavbar");
+    if (window.scrollY > 20) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+
+
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top < window.innerHeight - 50 && rect.bottom > 0
+    );
+  }
+
+   function revealOnScroll() {
+    const elements = document.querySelectorAll('.fade-in');
+    elements.forEach(el => {
+      if (isInViewport(el)) {
+        el.classList.add('show');
+      }
+    });
+  }
+
+
+  window.addEventListener('load', revealOnScroll);
+  window.addEventListener('scroll', revealOnScroll);
+</script>
